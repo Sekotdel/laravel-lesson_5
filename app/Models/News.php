@@ -1,64 +1,38 @@
 <?php
 
 namespace App\Models;
-use App\Models\Categories;
-use Illuminate\Support\Facades\File;
 
-class News
+
+use Illuminate\Database\Eloquent\Model;
+
+class News extends Model
 {
-    private Categories $category;
-    private array $news = [
-        '1' => [
-            'id' => 1,
-            'title' => 'Новость 1',
-            'text' => 'А у нас новость 1 и она очень хорошая!',
-            'category_id' => 1,
-            'isPrivate' => true
-        ],
-        '2' => [
-            'id' => 2,
-            'title' => 'Новость 2',
-            'text' => 'А тут плохие новости(((',
-            'category_id' => 2,
-            'isPrivate' => false
-        ]
-    ];
+    protected $fillable = ['title', 'text', 'isPrivate', 'category_id'];
 
-
-    public function __construct(Categories $category)
+    public function category()
     {
-        $this->category = $category;
+        return $this->belongsTo(Category::class);
     }
 
-
-//    public function getNews(): array
-//    {
-//        return $this->news;
-//    }
-    public function getNews() //вывод новостей из файла
+    public function rules()
     {
-        return json_decode(File::get(storage_path() . '/news.json'), true);
+        //$tableNameCategory = (new Category())->getTable();
+        return [
+            'title' => 'required|min:3|max:20',
+            'text' => 'required|min:5',
+            'category_id' => "required|exists:App\Models\Category,id",
+            'isPrivate' => 'accepted',// не то выбрал
+            'image' => 'mimes:jpeg,bmp,png,|max:1000'
+        ];
     }
 
-    public function getNewsByCategorySlug($slug): array
+    public function attributeNames()
     {
-        $id = $this->category->getCategoryIdBySlug($slug);
-        return $this->getNewsByCategoryId($id);
-    }
-
-    public function getNewsByCategoryId($id): array
-    {
-        $news = [];
-        foreach ($this->getNews() as $item) {
-            if ($item['category_id'] == $id) {
-                $news[] = $item;
-            }
-        }
-        return $news;
-    }
-
-    public function getNewsById($id)
-    {
-        return $this->getNews()[$id] ?? [];
+        return [
+            'title' => '"Заголовок новости"',
+            'text' => '"Текст новости"',
+            'category_id' => '"Категория новости"',
+            'image' => '"Изображение"'
+        ];
     }
 }

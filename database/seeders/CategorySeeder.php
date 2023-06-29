@@ -14,21 +14,17 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        //DB::table('news')->insert();
-    }
+        $category = [
+            [
+                "title" => "Спорт",
+                "slug" => "sport"
+            ],
+            [
+                "title" => "Политика",
+                "slug" => "politics"
+            ],
+        ];
 
-    public function getData()
-    {
-        //не совсем понял, надо было через seeder заполнять, или как-то по другому
-//        $data = [
-//            [
-//            'title' => 'Спорт',
-//            'slug' => 'sports'
-//            ],
-//            [
-//            'title' => 'Политика',
-//            'slug' => 'politics'
-//            ]
-//        ];
+        DB::table('categories')->insert($category);
     }
 }

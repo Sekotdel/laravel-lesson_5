@@ -8,17 +8,15 @@ use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
-    public function index(News $news)
+    public function index()
     {
-        $news = DB::table('news')->get();
+        $news = News:: query()->paginate(3);
         return view('news.index')->with('news', $news);
-        //return view('news.index')->with('news', $news->getNews());
     }
 
-    public function show(News $news, $id)
+    public function show($id)
     {
-        $news = DB::table('news')->find($id);
+        $news = News::query()->find($id);
         return view('news.one')->with('news', $news);
-        //return view('news.one')->with('news', $news->getNewsById($id));
     }
 }

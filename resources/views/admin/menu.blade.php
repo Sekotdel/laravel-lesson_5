@@ -2,8 +2,8 @@
     <a class="nav-link" href="{{ route('admin.index') }}">Админка главная</a>
 </li>
 
-<li class="nav-item {{ request()->routeIs('admin.create')?'active':'' }}">
-    <a class="nav-link" href="{{ route('admin.create') }}">Добавить новость</a>
+<li class="nav-item {{ request()->routeIs('admin.news.create')?'active':'' }}">
+    <a class="nav-link" href="{{ route('admin.news.create') }}">Добавить новость</a>
 </li>
 
 <li class="nav-item {{ request()->routeIs('admin.test1')?'active':'' }}">

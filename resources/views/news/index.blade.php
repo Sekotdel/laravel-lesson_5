@@ -13,11 +13,13 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="text-center">Новости</h3>
-                        @forelse($news as $item)<a href="{{ route('news.one', $item->id) }}"> {{ $item->title }}</a>
-                        <div class="card-img" style="background-image: url({{ $item->image ?? asset('storage/img/default.jpeg') }})"></div>
+                        @forelse($news as $item)<a href="{{ route('news.one', $item->id) }}"> {{ $item->title }}
+                            <div class="card-img" style="background-image: url({{ $item->image ?? asset('storage/img/default.jpeg') }})"></div>
+                        </a><br>
                         @empty
-                            <p class="text-center">Нет новостей</p>
+                            <p class="card-text">Нет новостей</p>
                         @endforelse
+                        {{ $news->links() }}
                     </div>
                 </div>
             </div>
