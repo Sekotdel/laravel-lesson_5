@@ -12,7 +12,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Форма добавления новости</h5>
+                        <h5 class="card-title text-center">Редактирование новости</h5>
                         <form method="POST" action="{{ route('admin.news.update', $news) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -55,6 +55,13 @@
                                 @endif
 
                                 <div class="form-check">
+                                    @if($errors->has('isPrivate'))
+                                        <div class="alert alert-danger mt-1" role="alert">
+                                            @foreach($errors->get('isPrivate') as $error)
+                                                {{ $error }}
+                                            @endforeach
+                                        </div>
+                                    @endif
                                     <input class="form-check-input" type="checkbox"
                                            @if ($news->isPrivate == 1) checked @endif name="isPrivate" value="1">
                                     <label for="newsPrivate">Приватная</label>

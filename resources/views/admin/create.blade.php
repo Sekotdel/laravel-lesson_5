@@ -54,13 +54,13 @@
                                 @endif
 
                                 <div class="form-check">
-{{--                                    @if($errors->has('isPrivate'))--}}
-{{--                                        <div class="alert alert-danger mt-1" role="alert">--}}
-{{--                                            @foreach($errors->get('isPrivate') as $error)--}}
-{{--                                                {{ $error }}--}}
-{{--                                            @endforeach--}}
-{{--                                        </div>--}}
-{{--                                    @endif--}}
+                                    @if($errors->has('isPrivate'))
+                                        <div class="alert alert-danger mt-1" role="alert">
+                                            @foreach($errors->get('isPrivate') as $error)
+                                                {{ $error }}
+                                            @endforeach
+                                        </div>
+                                    @endif
                                     <input class="form-check-input" type="checkbox" @if (old('isPrivate')) checked @endif name="isPrivate" value="1">
                                     <label for="newsPrivate">Приватная</label>
                                 </div>
