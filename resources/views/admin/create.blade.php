@@ -26,9 +26,12 @@
                                     </div>
                                 @endif
 
-                                <label for="newsText">Текст:</label>
-                                <textarea name="text" id="newsText" class="form-control">{{ old('text') }}</textarea>
-                                @if($errors->has('text'))
+                                <label for="createText">Текст:</label>
+                                <textarea name="text" id="newsText" class="form-control">{ !! old('text') !! }</textarea>
+                                <script>
+                                    CKEDITOR.replace('createText', options);
+                                </script>
+                            @if($errors->has('text'))
                                     <div class="alert alert-danger mt-1" role="alert">
                                         @foreach($errors->get('text') as $error)
                                             {{ $error }}
